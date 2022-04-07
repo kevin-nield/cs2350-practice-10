@@ -51,46 +51,45 @@ function addNewCard(event){
     displayCards()
 }
 
-function displayCards() {
-    let cards = getCards()
-    let cards_html = ''
-    let ndx = 0
-    for (let c of cards) {
-        cards_html +=`
-    <div class="card col mb-3" data-ndx="${ndx}">
-    <div class="row g-0">
-        <div class="col-md-4">
-        <img src="${c.poster}" class="img-fluid rounded-start" alt="${c.place}">
-        </div>
-        <div class="col-md-8">
-        <div class="card-body">
-            <h5 class="card-title">${c.place}</h5>
-            <p class="card-text">${c.description}</p>
-            <p class="card-text">
-                <button class="btn btn-danger to-Delete">Delete</button>
-            </p>
-        </div>
-        </div>
-    </div>
-    </div>
-    `
-    ndx++
-    }
-
-    document.querySelector("#cards").innerHTML= cards_html
-
-    document.querySelectorAll('.to-delete').forEach(function(btn){
-        btn.onclick = function(event){
-            if(confirm("Are you sure you want to delete this card?")){
-                cards.splice(event.target.closest('.col').dataset.ndx, 1)
-                localStorage.setItem("cards", JSON.stringify(cards))
-                displayCards()
-            }
+    function displayCards(){
+        let cards = initial_cards
+        let cards_html = ''
+        let ndx = 0
+        for (let c of cards){
+            cards_html += `
+                <div class="card mb-3" data-ndx="${ndx}">
+                    <div class="row g-0">
+                        <div class = "col-md-4">
+                            <img src="c.poster}" class ="img-fluid rounded-start" alt="${c.place}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${c.place}</h5>
+                                <p class="card-text">${c.description}</p>
+                                <p class="card-text">
+                                    <button class="btn btn-danger to-delete">Delete</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+            ndx++
         }
-    })
+        document.querySelector("#cards").innerHTML= cards_html
 
-    hideForm()
-}
+        document.querySelectorAll('.to-delete').forEach(function(btn){
+            btn.onclick = function(event){
+                if(confirm("Are you sure you want to delete this card?")){
+                    cards.splice(event.target.closest('.col').dataset.ndx, 1)
+                    localStorage.setItem("cards", JSON.stringify(cards))
+                    displayCards()
+                }
+            }
+        })
+
+        hideForm()
+    }
 
 document.querySelector("#myForm").onsubmit = addNewCard
 document.querySelector("#new_card").onlick = hideCards
