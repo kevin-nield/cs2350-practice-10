@@ -81,7 +81,7 @@ function addNewCard(event){
         document.querySelectorAll('.to-delete').forEach(function(btn){
             btn.onclick = function(event){
                 if(confirm("Are you sure you want to delete this card?")){
-                    cards.splice(event.target.closest('.col').dataset.ndx, 1)
+                    cards.splice(event.target.closest('.card').dataset.ndx, 1)
                     localStorage.setItem("cards", JSON.stringify(cards))
                     displayCards()
                 }
@@ -92,6 +92,6 @@ function addNewCard(event){
     }
 
 document.querySelector("#myForm").onsubmit = addNewCard
-document.querySelector("#new_card").onlick = hideCards
-document.querySelector(".to-cancel").onlick = hideForm
+document.querySelector("#new_card").onclick = hideCards
+document.querySelector(".to-cancel").onclick = hideForm
 displayCards()
